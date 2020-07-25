@@ -1,0 +1,22 @@
+language: generic 
+sudo: required
+services:
+ - docker
+
+
+before_install:
+ - docker build -t partha2020/mulit-test -f ./client/Dockerfile.dev ./client
+
+#script:
+# - docker run -e CI=true partha2020/mulit-test npm test
+
+after_success:
+ - docker build -t partha2020/mulit-client ./client
+ - docker build -t partha2020/mulit-nginx ./nginx
+ - docker build -t partha2020/mulit-server ./server
+ - docker build -t partha2020/mulit-worker ./worker
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+ - docker push partha2020/mulit-client
+ - docker push partha2020/mulit-nginx
+ - docker push partha2020/mulit-server
+ - docker push partha2020/mulit-worker

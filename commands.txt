@@ -1,0 +1,15 @@
+#clint
+docker build -f Dockerfile.dev .
+docker run 06e8244ef142
+
+#server
+docker build -f Dockerfile.dev .
+docker run 02021659e53b
+
+
+#worker
+docker build -f Dockerfile.dev .
+docker run 19f1634f594b
+
+#
+docker-compose down && docker-compose up --build
