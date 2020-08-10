@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+	{
+	  "name": "client",
+	  "image": "partha2020/mulit-client",
+	  "hostname": "client",
+	  "essential": false
+	},
+	{
+	  "name": "server",
+	  "image": "partha2020/mulit-server",
+	  "hostname": "api",
+	  "essential": false
+	},
+	{
+	  "name": "worker",
+	  "image": "partha2020/mulit-worker",
+	  "hostname": "worker",
+	  "essential": false
+	},
+	{
+	  "name": "nginx",
+	  "image": "partha2020/mulit-nginx",
+	  "hostname": "nginx",
+	  "essential": true,
+	  "portMappings": [
+		{
+			"hostPort": 80,
+			"containerPort": 80
+		}
+	  ],
+	  "links": ["client","server"]
+	}
+  ]
+}

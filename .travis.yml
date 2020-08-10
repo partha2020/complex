@@ -16,3 +16,16 @@ after_success:
  - docker push partha2020/mulit-nginx
  - docker push partha2020/mulit-server
  - docker push partha2020/mulit-worker
+ 
+deploy:
+ edge: true
+ provider: elasticbeanstalk
+ region: "us-east-2"
+ app: "multi-docker"
+ env: "MultiDocker-env"
+ bucket_name: "elasticbeanstalk-us-east-2-531107532671"
+ bucket_path: "docker-mulit"
+ on:
+  branch: master
+ access_key_id: $AWS_ACCESS_KEY
+ secret_access_key: $AWS_SECRET_KEY
